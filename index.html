@@ -1,1 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechLift Liberia — One Page WebApp</title>
+  <style>
+    :root{ --accent:#0b5cff; }
+    *{ box-sizing:border-box; }
+    body{ font-family:Arial, Helvetica, sans-serif; margin:0; color:#222; background:#f9f9fb; }
+    header{ background:linear-gradient(90deg,#012a4a,#013a63); color:white; padding:24px 16px; }
+    .container{ max-width:1100px; margin:0 auto; padding:24px; }
+    nav{ display:flex; gap:12px; flex-wrap:wrap; }
+    nav a{ color:white; text-decoration:none; padding:8px 12px; border-radius:6px; }
+    nav a:hover{ background:rgba(255,255,255,0.1); }
+    .hero{ display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center; }
+    .hero h1{ margin:0 0 8px; font-size:32px; }
+    section{ padding:50px 0; border-bottom:1px solid #eee; }
+    h2{ margin-top:0; font-size:28px; color:#013a63; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .card{ background:white; border:1px solid #e6e6e6; padding:16px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.04); }
+    .btn{ display:inline-block; padding:10px 16px; background:var(--accent); color:white; border-radius:6px; text-decoration:none; }
+    form input, form select{ width:100%; padding:10px; margin:8px 0 16px 0; border:1px solid #ccc; border-radius:6px; }
+    footer{ background:#012a4a; color:white; text-align:center; padding:20px; }
+
+    /* Modal */
+    .modal-bg{ position:fixed; inset:0; background:rgba(0,0,0,0.55); display:none; justify-content:center; align-items:center; padding:20px; }
+    .modal{ background:white; padding:20px; max-width:400px; width:100%; border-radius:10px; }
+    .modal h3{ margin-top:0; }
+    .close{ float:right; cursor:pointer; font-weight:bold; }
+
+    @media(max-width:700px){ .hero{ flex-direction:column; align-items:flex-start; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container hero">
+    <div>
+      <h1>TechLift Liberia</h1>
+      <p>Empowering Liberia through technology training, certifications, and partnerships.</p>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#trainings">Trainings</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#partners">Partners</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="openAuth()">Sign In / Register</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <section id="home">
+    <h2>Welcome to TechLift Liberia</h2>
+    <p>We provide hands-on technology training, certify students with industry-recognized credentials, and partner with universities and organizations to grow Liberia’s digital workforce.</p>
+    <div class="grid">
+      <div class="card"><h3>Mission</h3><p>To uplift communities through practical IT skill-building and industry certifications.</p></div>
+      <div class="card"><h3>Vision</h3><p>A Liberia where technology accelerates opportunity for all.</p></div>
+      <div class="card"><h3>Join Us</h3><p>Subscribe for training updates or partner with us.</p><a class="btn" href="#" onclick="openAuth()">Get Started</a></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About TechLift Liberia</h2>
+    <p>TechLift Liberia is a professional capacity-building program focused on IT training, network engineering, cybersecurity, and modern software development. We collaborate with universities and industries locally and internationally.</p>
+  </section>
+
+  <section id="programs">
+    <h2>Programs</h2>
+    <div class="grid">
+      <div class="card"><h3>MikroTik Certifications</h3><p>Routing, switching, wireless, and security engineering.</p></div>
+      <div class="card"><h3>Web Application Development</h3><p>HTML, CSS, JavaScript, PHP, and full-stack tooling.</p></div>
+      <div class="card"><h3>Cybersecurity Foundations</h3><p>Threat modeling, SOC basics, and defensive security.</p></div>
+    </div>
+  </section>
+
+  <section id="trainings">
+    <h2>Upcoming Trainings</h2>
+    <p>We offer cohort-based trainings every quarter. Contact us to be notified.</p>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <p>We train students toward globally recognized certifications—MikroTik, DevOps fundamentals, and more.</p>
+  </section>
+
+  <section id="partners">
+    <h2>Partners</h2>
+    <p>TechLift Liberia collaborates with universities, companies, and NGOs to scale digital skills nationwide.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:professorhudsonsiahk@gmail.com">professorhudsonsiahk@gmail.com</a></p>
+    <p>Location: Monrovia, Liberia</p>
+  </section>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal-bg">
+  <div class="modal">
+    <span class="close" onclick="closeAuth()">&times;</span>
+    <h3>User Access</h3>
+    <div>
+      <button class="btn" onclick="showLogin()">Sign In</button>
+      <button class="btn" style="background:#555;margin-left:10px;" onclick="showRegister()">Register</button>
+    </div>
+
+    <div id="loginBox" style="margin-top:20px; display:none;">
+      <h4>Sign In</h4>
+      <form>
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+
+    <div id="registerBox" style="margin-top:20px; display:none;">
+      <h4>Register</h4>
+      <form>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="btn" type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAuth(){ document.getElementById('authModal').style.display='flex'; }
+function closeAuth(){ document.getElementById('authModal').style.display='none'; }
+function showLogin(){
+  document.getElementById('loginBox').style.display='block';
+  document.getElementById('registerBox').style.display='none';
+}
+function showRegister(){
+  document.getElementById('loginBox').style.display='none';
+  document.getElementById('registerBox').style.display='block';
+}
+</script>
+
+<footer>
+  <p>&copy; 2025 TechLift Liberia — Empowering the Future of Technology Education</p>
+</footer>
+
+</body>
+</html>
 
