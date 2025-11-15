@@ -3,151 +3,501 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TechLift Liberia — One Page WebApp</title>
+  <title>TechLift Africa — all in one WebApp</title>
+  <meta name="description" content="TechLift Africa — training, certifications, partnerships across industries. Responsive one-page web application with user management demo." />
   <style>
-    :root{ --accent:#0b5cff; }
-    *{ box-sizing:border-box; }
-    body{ font-family:Arial, Helvetica, sans-serif; margin:0; color:#222; background:#f9f9fb; }
-    header{ background:linear-gradient(90deg,#012a4a,#013a63); color:white; padding:24px 16px; }
-    .container{ max-width:1100px; margin:0 auto; padding:24px; }
-    nav{ display:flex; gap:12px; flex-wrap:wrap; }
-    nav a{ color:white; text-decoration:none; padding:8px 12px; border-radius:6px; }
-    nav a:hover{ background:rgba(255,255,255,0.1); }
-    .hero{ display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center; }
-    .hero h1{ margin:0 0 8px; font-size:32px; }
-    section{ padding:50px 0; border-bottom:1px solid #eee; }
-    h2{ margin-top:0; font-size:28px; color:#013a63; }
-    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
-    .card{ background:white; border:1px solid #e6e6e6; padding:16px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.04); }
-    .btn{ display:inline-block; padding:10px 16px; background:var(--accent); color:white; border-radius:6px; text-decoration:none; }
-    form input, form select{ width:100%; padding:10px; margin:8px 0 16px 0; border:1px solid #ccc; border-radius:6px; }
-    footer{ background:#012a4a; color:white; text-align:center; padding:20px; }
+    :root{
+      --bg:#f6f8fb; --card:#fff; --muted:#6b7280; --accent:#0b5cff; --dark:#04293a;
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; color:var(--dark); background:linear-gradient(180deg,#f6f8fb 0%, #eef3fb 100%)}
+    a{color:inherit}
 
-    /* Modal */
-    .modal-bg{ position:fixed; inset:0; background:rgba(0,0,0,0.55); display:none; justify-content:center; align-items:center; padding:20px; }
-    .modal{ background:white; padding:20px; max-width:400px; width:100%; border-radius:10px; }
-    .modal h3{ margin-top:0; }
-    .close{ float:right; cursor:pointer; font-weight:bold; }
+    /* Layout */
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(90deg,var(--dark),#013a63); color:#fff;padding:14px 18px;box-shadow:0 6px 18px rgba(2,6,23,0.25)}
+    .container{max-width:1200px;margin:0 auto;padding:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0066ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    nav{display:flex;gap:8px;align-items:center;margin-left:18px}
+    .menu{display:flex;gap:6px;align-items:center}
+    .menu a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;font-size:14px}
+    .menu a:hover{background:rgba(255,255,255,0.06)}
+    .right-actions{margin-left:auto;display:flex;gap:8px}
+    .btn{background:var(--accent);color:white;padding:9px 14px;border-radius:8px;text-decoration:none;font-weight:700;border:none;cursor:pointer}
 
-    @media(max-width:700px){ .hero{ flex-direction:column; align-items:flex-start; } }
+    /* mobile toggle */
+    .mobile-toggle{display:none;background:transparent;border:0;color:white;font-size:22px}
+
+    /* Hero */
+    .hero{display:flex;gap:20px;align-items:center;padding:40px 0;color:white}
+    .hero .left{flex:1}
+    .hero h1{margin:0;font-size:34px;line-height:1.05}
+    .hero p{margin:12px 0 0;color:rgba(255,255,255,0.9);font-size:16px}
+    .hero-actions{margin-top:18px;display:flex;gap:10px}
+
+    main{padding:30px 0}
+    section{padding:36px 0;border-bottom:1px solid rgba(10,20,40,0.04)}
+    h2{margin:0 0 12px 0;color:var(--dark);font-size:22px}
+    p.lead{color:var(--muted);margin:0 0 18px 0}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,40,0.06);border:1px solid rgba(10,20,40,0.04)}
+    .card h3{margin:0 0 8px 0}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Courses mega menu */
+    .mega{position:relative}
+    .dropdown{position:absolute;left:0;top:calc(100% + 8px);background:var(--card);min-width:320px;border-radius:12px;padding:16px;box-shadow:0 10px 30px rgba(2,6,23,0.12);display:none}
+    .dropdown .col{min-width:160px;padding:6px}
+    .menu-item{position:relative}
+    .menu-item:hover .dropdown, .menu-item:focus-within .dropdown{display:flex;gap:12px}
+
+    /* Search bar */
+    .searchbar{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.06);padding:6px;border-radius:10px}
+    .searchbar input{border:0;padding:8px;background:transparent;color:white;outline:none;width:220px}
+
+    /* Footer */
+    footer{padding:24px;background:#031c2b;color:#b6c6d6;text-align:center}
+
+    /* Responsive */
+    @media(max-width:920px){
+      nav{display:flex;align-items:center}
+      .menu{display:none}
+      .mobile-toggle{display:inline-block}
+    }
+
+    /* Mobile menu drawer */
+    .drawer{position:fixed;inset:0;display:none}
+    .drawer .backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.5)}
+    .drawer .panel{position:absolute;right:0;top:0;height:100%;width:320px;background:var(--card);padding:18px;box-shadow:-10px 0 40px rgba(2,6,23,0.2);overflow:auto}
+    .drawer .panel a{display:block;padding:10px 6px;color:var(--dark);text-decoration:none}
+
+    /* Modal and forms */
+    .modal-bg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,23,0.45);z-index:70}
+    .modal{background:var(--card);padding:18px;border-radius:12px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(2,6,23,0.2)}
+    form input, form select, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(10,20,40,0.06);margin:8px 0}
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#eef4ff,#f6fbff);border:1px solid rgba(10,20,40,0.03);font-weight:600;font-size:13px}
+
+    /* dashboard */
+    .dashboard{display:none;padding:18px;background:linear-gradient(180deg,#ffffff,#fbfdff);border-radius:12px}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#ffd89b,#19547b);display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+
+    /* small screens adjustments */
+    @media(max-width:520px){.hero h1{font-size:22px}.hero{padding:20px 0}}
   </style>
 </head>
 <body>
 
 <header>
-  <div class="container hero">
-    <div>
-      <h1>TechLift Liberia</h1>
-      <p>Empowering Liberia through technology training, certifications, and partnerships.</p>
+  <div class="container" style="display:flex;align-items:center">
+    <div style="display:flex;align-items:center">
+      <div class="logo">TL</div>
+      <div style="margin-left:10px">
+        <div style="font-weight:800">TechLift Africa</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.85)">Training — Certifications — Partnerships</div>
+      </div>
     </div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#programs">Programs</a>
-      <a href="#trainings">Trainings</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#partners">Partners</a>
-      <a href="#contact">Contact</a>
-      <a href="#" onclick="openAuth()">Sign In / Register</a>
+
+    <nav style="display:flex;align-items:center;margin-left:20px;flex:1">
+      <button class="mobile-toggle" id="openMobile" aria-label="Open menu">☰</button>
+
+      <div class="menu" role="menubar">
+        <div class="menu-item"><a href="#home">Home</a></div>
+        <div class="menu-item"><a href="#about">About</a></div>
+        <div class="menu-item mega" tabindex="0">
+          <a href="#programs">Programs ▾</a>
+          <div class="dropdown" role="menu" aria-label="Programs menu">
+            <div class="col">
+              <strong>Information Technology</strong>
+              <ul class="small" style="padding-left:12px;margin-top:8px">
+                <li>Digital Literacy</li>
+                <li>Network Engineering</li>
+                <li>Cloud & DevOps</li>
+                <li>Cybersecurity</li>
+                <li>Data Science & AI</li>
+              </ul>
+            </div>
+            <div class="col">
+              <strong>Engineering & Tech</strong>
+              <ul class="small" style="padding-left:12px;margin-top:8px">
+                <li>Mechanical & Electrical</li>
+                <li>Civil & Construction</li>
+                <li>Telecommunications</li>
+                <li>Automation & Robotics</li>
+              </ul>
+            </div>
+            <div class="col">
+              <strong>Business & Creative</strong>
+              <ul class="small" style="padding-left:12px;margin-top:8px">
+                <li>Project Management</li>
+                <li>Finance & Accounting</li>
+                <li>Digital Marketing</li>
+                <li>Graphic & Media</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item mega" tabindex="0">
+          <a href="#trainings">Trainings ▾</a>
+          <div class="dropdown">
+            <div class="col"><strong>Healthcare & Public Health</strong><ul class="small" style="padding-left:12px;margin-top:8px"><li>Community Health</li><li>Lab Tech</li><li>EMT</li></ul></div>
+            <div class="col"><strong>Agriculture</strong><ul class="small" style="padding-left:12px;margin-top:8px"><li>Crop Science</li><li>AgriTech</li><li>Food Processing</li></ul></div>
+            <div class="col"><strong>Energy & Maritime</strong><ul class="small" style="padding-left:12px;margin-top:8px"><li>Renewables</li><li>Oil & Gas Safety</li><li>Maritime Safety</li></ul></div>
+          </div>
+        </div>
+
+        <div class="menu-item mega" tabindex="0">
+          <a href="#certifications">Certifications ▾</a>
+          <div class="dropdown">
+            <div class="col"><strong>Partners</strong><ul class="small" style="padding-left:12px;margin-top:8px"><li>CompTIA</li><li>Cisco</li><li>AWS</li><li>MikroTik</li></ul></div>
+            <div class="col"><strong>Industry Certs</strong><ul class="small" style="padding-left:12px;margin-top:8px"><li>ACCA</li><li>CIMA</li><li>PMI</li><li>NEBOSH</li></ul></div>
+          </div>
+        </div>
+
+        <div class="menu-item"><a href="#partners">Partners</a></div>
+        <div class="menu-item"><a href="#contact">Contact</a></div>
+      </div>
+
+      <div class="right-actions">
+        <div class="searchbar" role="search" aria-label="Search courses">
+          <input id="searchInput" placeholder="Search courses or industries" aria-label="Search courses" />
+          <button class="btn" onclick="searchCourses()">Search</button>
+        </div>
+        <button class="btn" onclick="openAuth()" id="authBtn">Sign In</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<div class="container">
-  <section id="home">
-    <h2>Welcome to TechLift Liberia</h2>
-    <p>We provide hands-on technology training, certify students with industry-recognized credentials, and partner with universities and organizations to grow Liberia’s digital workforce.</p>
-    <div class="grid">
-      <div class="card"><h3>Mission</h3><p>To uplift communities through practical IT skill-building and industry certifications.</p></div>
-      <div class="card"><h3>Vision</h3><p>A Liberia where technology accelerates opportunity for all.</p></div>
-      <div class="card"><h3>Join Us</h3><p>Subscribe for training updates or partner with us.</p><a class="btn" href="#" onclick="openAuth()">Get Started</a></div>
+<main class="container">
+  <section id="home" style="display:flex;gap:20px;align-items:center">
+    <div class="left" style="flex:1">
+      <h1>TechLift Africa — Skills, Certification & Partnerships</h1>
+      <p class="lead">Accelerating employability across Africa with industry-aligned training, accredited certifications, and strategic institutional partnerships.</p>
+      <div class="hero-actions">
+        <button class="btn" onclick="openAuth()">Start Learning</button>
+        <a class="btn" style="background:#2b8a3e" href="#programs">View Programs</a>
+      </div>
+
+      <div style="margin-top:18px" class="chips">
+        <div class="chip">Online</div>
+        <div class="chip">Instructor-Led</div>
+        <div class="chip">Cohorts</div>
+        <div class="chip">Accredited</div>
+      </div>
+    </div>
+    <div style="width:420px;max-width:42%">
+      <div class="card">
+        <h3>Why TechLift?</h3>
+        <p class="small">Practical training, real-world labs, employer connections, and certification pathways with global partners.</p>
+        <ul class="small" style="margin-top:12px">
+          <li>Industry-vetted courses</li>
+          <li>Hands-on labs & capstones</li>
+          <li>Job placement assistance</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section id="about">
-    <h2>About TechLift Liberia</h2>
-    <p>TechLift Liberia is a professional capacity-building program focused on IT training, network engineering, cybersecurity, and modern software development. We collaborate with universities and industries locally and internationally.</p>
+    <h2>About TechLift Africa</h2>
+    <p class="lead">TechLift Africa provides modular training across every major industry area, with course pathways from beginner to specialist levels. We build local capacity by partnering with universities, employers, and certification bodies.</p>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3>Mission</h3><p class="small">To empower African youth and professionals with the skills employers demand.</p></div>
+      <div class="card"><h3>Vision</h3><p class="small">A continent where skills and opportunities meet.</p></div>
+      <div class="card"><h3>Accreditation</h3><p class="small">We pursue formal accreditation with global partners to give graduates recognised credentials.</p></div>
+    </div>
   </section>
 
   <section id="programs">
-    <h2>Programs</h2>
-    <div class="grid">
-      <div class="card"><h3>MikroTik Certifications</h3><p>Routing, switching, wireless, and security engineering.</p></div>
-      <div class="card"><h3>Web Application Development</h3><p>HTML, CSS, JavaScript, PHP, and full-stack tooling.</p></div>
-      <div class="card"><h3>Cybersecurity Foundations</h3><p>Threat modeling, SOC basics, and defensive security.</p></div>
+    <h2>Programs & Courses</h2>
+    <p class="lead">Explore our industry-aligned course categories. Click a course to view details and enroll (demo).</p>
+
+    <div id="coursesGrid" class="grid" style="margin-top:12px">
+      <!-- course cards populated by JS -->
     </div>
   </section>
 
   <section id="trainings">
     <h2>Upcoming Trainings</h2>
-    <p>We offer cohort-based trainings every quarter. Contact us to be notified.</p>
+    <p class="lead">Cohort-based trainings start every quarter. Apply to reserve a seat.</p>
+    <div class="grid" style="margin-top:12px">
+      <div class="card"><h3>Full-Stack Web Development</h3><p class="small">12-week intensive cohort — capstone project included.</p><button class="btn" onclick="openEnroll('Full-Stack Web Development')">Apply</button></div>
+      <div class="card"><h3>MikroTik Network Engineering</h3><p class="small">Routing, switching & wireless — prepares for MTNA and MTCNA.</p><button class="btn" onclick="openEnroll('MikroTik Network Engineering')">Apply</button></div>
+      <div class="card"><h3>Cybersecurity Foundations</h3><p class="small">SOC workflows, incident response, and basic forensics.</p><button class="btn" onclick="openEnroll('Cybersecurity Foundations')">Apply</button></div>
+    </div>
   </section>
 
   <section id="certifications">
-    <h2>Certifications</h2>
-    <p>We train students toward globally recognized certifications—MikroTik, DevOps fundamentals, and more.</p>
+    <h2>Accreditation & Partners</h2>
+    <p class="lead">We partner with leading certification bodies and academic institutions to ensure recognized credentials.</p>
+    <div class="grid" style="margin-top:12px">
+      <div class="card"><h3>Technology Partners</h3><p class="small">Cisco, AWS, Microsoft, MikroTik, CompTIA</p></div>
+      <div class="card"><h3>Academic Partners</h3><p class="small">Local universities, polytechnics, and regional colleges — MOUs available.</p></div>
+      <div class="card"><h3>Industry Partners</h3><p class="small">Employers and NGOs for internships & placements.</p></div>
+    </div>
   </section>
 
   <section id="partners">
-    <h2>Partners</h2>
-    <p>TechLift Liberia collaborates with universities, companies, and NGOs to scale digital skills nationwide.</p>
+    <h2>Strategic Partners</h2>
+    <p class="lead">Key organisations we collaborate with for accreditation, curricula, and placements.</p>
+    <div class="grid" style="margin-top:12px">
+      <div class="card"><h3>Global Bodies</h3><p class="small">WHO, FAO, ILO, UNESCO (partnerships by program)</p></div>
+      <div class="card"><h3>Certification Bodies</h3><p class="small">PMI, ACCA, CIMA, NEBOSH, IATA</p></div>
+      <div class="card"><h3>Corporate</h3><p class="small">Cloud providers, telcos, and tech firms for hiring pipelines.</p></div>
+    </div>
   </section>
 
   <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:professorhudsonsiahk@gmail.com">professorhudsonsiahk@gmail.com</a></p>
-    <p>Location: Monrovia, Liberia</p>
+    <h2>Contact & Office</h2>
+    <p class="lead">Reach us to discuss partnerships, bulk training, or curriculum licensing.</p>
+    <div class="grid" style="margin-top:12px">
+      <div class="card">
+        <h3>Contact</h3>
+        <p class="small">Email: <a href="mailto:professorhudsonsiahk@gmail.com">professorhudsonsiahk@gmail.com</a></p>
+        <p class="small">Location: Monrovia, Liberia</p>
+        <button class="btn" onclick="openPartnerForm()">Partner With Us</button>
+      </div>
+      <div class="card">
+        <h3>Subscribe</h3>
+        <p class="small">Get training updates and cohort invites.</p>
+        <form id="subscribeForm" onsubmit="event.preventDefault();subscribe()">
+          <input id="subEmail" type="email" placeholder="Your email" required />
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
   </section>
+
+  <section id="dashboardArea">
+    <h2>Account</h2>
+    <div class="dashboard card" id="dashboard">
+      <!-- user dashboard dynamic -->
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <div>&copy; 2025 TechLift Africa — All rights reserved</div>
+      <div style="font-size:13px;color:var(--muted)">Built for capacity, accredited for impact</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile Drawer -->
+<div class="drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="backdrop" onclick="closeMobile()"></div>
+  <div class="panel">
+    <div style="display:flex;align-items:center;justify-content:space-between"><strong>Menu</strong><button onclick="closeMobile()">✕</button></div>
+    <hr style="margin:12px 0" />
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#programs" onclick="closeMobile()">Programs</a>
+    <a href="#trainings" onclick="closeMobile()">Trainings</a>
+    <a href="#certifications" onclick="closeMobile()">Certifications</a>
+    <a href="#partners" onclick="closeMobile()">Partners</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+    <hr />
+    <button class="btn" style="width:100%;margin-top:8px" onclick="openAuth();closeMobile()">Sign In / Register</button>
+  </div>
 </div>
 
-<!-- AUTH MODAL -->
-<div id="authModal" class="modal-bg">
-  <div class="modal">
-    <span class="close" onclick="closeAuth()">&times;</span>
-    <h3>User Access</h3>
-    <div>
+<!-- Auth Modal -->
+<div class="modal-bg" id="authModal" role="dialog" aria-modal="true">
+  <div class="modal" role="document">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>User Access</h3>
+      <button onclick="closeAuth()" aria-label="Close">✕</button>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:8px">
       <button class="btn" onclick="showLogin()">Sign In</button>
-      <button class="btn" style="background:#555;margin-left:10px;" onclick="showRegister()">Register</button>
+      <button class="btn" style="background:#2d2d2d" onclick="showRegister()">Register</button>
     </div>
 
-    <div id="loginBox" style="margin-top:20px; display:none;">
+    <div id="loginBox" style="margin-top:16px;display:none">
       <h4>Sign In</h4>
-      <form>
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+      <form id="loginForm" onsubmit="event.preventDefault();loginUser()">
+        <input id="loginEmail" type="email" placeholder="Email" required />
+        <input id="loginPassword" type="password" placeholder="Password" required />
         <button class="btn" type="submit">Login</button>
       </form>
     </div>
 
-    <div id="registerBox" style="margin-top:20px; display:none;">
-      <h4>Register</h4>
-      <form>
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+    <div id="registerBox" style="margin-top:16px;display:none">
+      <h4>Create Account</h4>
+      <form id="registerForm" onsubmit="event.preventDefault();registerUser()">
+        <input id="regName" type="text" placeholder="Full name" required />
+        <input id="regEmail" type="email" placeholder="Email" required />
+        <input id="regPassword" type="password" placeholder="Password (min 6 chars)" required />
+        <select id="regRole"><option value="student">Student</option><option value="trainer">Trainer</option><option value="admin">Admin</option></select>
         <button class="btn" type="submit">Create Account</button>
       </form>
     </div>
   </div>
 </div>
 
+<!-- Enroll Modal -->
+<div class="modal-bg" id="enrollModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h3>Enroll</h3><button onclick="closeEnroll()">✕</button></div>
+    <div id="enrollBody"></div>
+  </div>
+</div>
+
+<!-- Partner Form Modal -->
+<div class="modal-bg" id="partnerModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h3>Partner With TechLift Africa</h3><button onclick="closePartnerForm()">✕</button></div>
+    <form onsubmit="event.preventDefault();submitPartner()">
+      <input id="orgName" placeholder="Organization or University" required />
+      <input id="orgEmail" type="email" placeholder="Contact email" required />
+      <textarea id="orgNote" placeholder="Brief message"></textarea>
+      <button class="btn" type="submit">Send Partnership Request</button>
+    </form>
+  </div>
+</div>
+
 <script>
-function openAuth(){ document.getElementById('authModal').style.display='flex'; }
-function closeAuth(){ document.getElementById('authModal').style.display='none'; }
-function showLogin(){
-  document.getElementById('loginBox').style.display='block';
-  document.getElementById('registerBox').style.display='none';
+// --- Demo Course Data (condensed list covering industries) ---
+const COURSES = [
+  {id:1,category:'Information Technology',title:'Digital Literacy',level:'Beginner',desc:'Fundamentals of computer use, internet, and productivity.'},
+  {id:2,category:'Information Technology',title:'Network Engineering (MikroTik)',level:'Intermediate',desc:'Routing, switching & wireless - MTCNA path.'},
+  {id:3,category:'Information Technology',title:'Cloud & DevOps',level:'Advanced',desc:'AWS/Azure fundamentals, CI/CD, containers.'},
+  {id:4,category:'Engineering & Tech',title:'Mechanical & Electrical Basics',level:'Beginner',desc:'Foundational workshop for technicians.'},
+  {id:5,category:'Business & Management',title:'Project Management (PMI-aligned)',level:'Professional',desc:'PMP prep and practical PM skills.'},
+  {id:6,category:'Health & Public Health',title:'Community Health Worker',level:'Beginner',desc:'Primary care basics and community outreach.'},
+  {id:7,category:'Agriculture',title:'Smart Farming & AgriTech',level:'Professional',desc:'Precision farming using sensors & data.'},
+  {id:8,category:'Energy',title:'Solar PV Installation',level:'Professional',desc:'Design and install solar photovoltaic systems.'},
+  {id:9,category:'Creative',title:'Graphic Design & Media',level:'Beginner',desc:'Design fundamentals & Adobe workflow.'},
+  {id:10,category:'Security & Law',title:'Cybercrime & Forensics',level:'Advanced',desc:'Digital investigations and evidence handling.'}
+];
+
+// Populate courses grid
+const coursesGrid = document.getElementById('coursesGrid');
+function renderCourses(list=COURSES){
+  coursesGrid.innerHTML = '';
+  list.forEach(c=>{
+    const d = document.createElement('div'); d.className='card';
+    d.innerHTML = `<h3>${escapeHtml(c.title)}</h3><div class="small">${escapeHtml(c.category)} • ${escapeHtml(c.level)}</div><p class="small">${escapeHtml(c.desc)}</p><div style="margin-top:10px;display:flex;gap:8px"><button class='btn' onclick="openEnroll('${encodeURIComponent(c.title)}')">Enroll</button><button class='btn' style='background:#2d2d2d' onclick="showCourse(${c.id})">Details</button></div>`;
+    coursesGrid.appendChild(d);
+  });
 }
-function showRegister(){
-  document.getElementById('loginBox').style.display='none';
-  document.getElementById('registerBox').style.display='block';
+renderCourses();
+
+// --- Utilities ---
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c])}
+
+// --- Search ---
+function searchCourses(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if(!q){renderCourses();return}
+  const res = COURSES.filter(c=> (c.title+c.category+c.desc+c.level).toLowerCase().includes(q));
+  renderCourses(res);
 }
+
+// --- Mobile Drawer ---
+const mobileDrawer = document.getElementById('mobileDrawer');
+document.getElementById('openMobile').addEventListener('click', ()=>{mobileDrawer.style.display='block';mobileDrawer.setAttribute('aria-hidden','false')});
+function closeMobile(){mobileDrawer.style.display='none';mobileDrawer.setAttribute('aria-hidden','true')}
+
+// --- Auth Modal & Basic User Manager (localStorage demo) ---
+const authModal = document.getElementById('authModal');
+function openAuth(){authModal.style.display='flex';showLogin();}
+function closeAuth(){authModal.style.display='none'}
+function showLogin(){document.getElementById('loginBox').style.display='block';document.getElementById('registerBox').style.display='none'}
+function showRegister(){document.getElementById('loginBox').style.display='none';document.getElementById('registerBox').style.display='block'}
+
+// Basic localStorage users store (demo-only; not secure)
+function getUsers(){return JSON.parse(localStorage.getItem('tl_users')||'[]')}
+function saveUsers(u){localStorage.setItem('tl_users',JSON.stringify(u))}
+
+function registerUser(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
+  const pwd=document.getElementById('regPassword').value;
+  const role=document.getElementById('regRole').value;
+  if(pwd.length<6){alert('Password must be 6+ chars');return}
+  const users=getUsers(); if(users.find(x=>x.email===email)){alert('Email already registered');return}
+  const user={id:Date.now(),name, email, pwd: btoa(pwd), role, enrolled:[]}; // simple encoding
+  users.push(user); saveUsers(users); localStorage.setItem('tl_current',JSON.stringify(user)); updateUIForUser(user);
+  alert('Account created — welcome, '+name);
+  closeAuth();
+}
+
+function loginUser(){
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pwd=document.getElementById('loginPassword').value;
+  const users=getUsers(); const user=users.find(u=>u.email===email && u.pwd===btoa(pwd));
+  if(!user){alert('Invalid credentials');return}
+  localStorage.setItem('tl_current',JSON.stringify(user)); updateUIForUser(user); closeAuth();
+}
+
+function logoutUser(){localStorage.removeItem('tl_current'); updateUIForUser(null);}
+
+function updateUIForUser(user){
+  const authBtn=document.getElementById('authBtn');
+  const dashboard=document.getElementById('dashboard');
+  if(user){
+    authBtn.textContent='Account'; authBtn.onclick=()=>{document.getElementById('dashboardArea').scrollIntoView({behavior:'smooth'})};
+    dashboard.style.display='block';
+    dashboard.innerHTML = `<div class='profile'><div class='avatar'>${escapeHtml((user.name||'U').split(' ').map(s=>s[0]).join('').slice(0,2).toUpperCase())}</div><div><strong>${escapeHtml(user.name)}</strong><div class='small'>${escapeHtml(user.email)} • ${escapeHtml(user.role)}</div></div><div style='margin-left:auto'><button class='btn' onclick='logoutUser()' style='background:#ef4444'>Logout</button></div></div><hr style='margin:12px 0' /><div id='enrolledList'><h4>Your Enrollments</h4><div class='small'>${user.enrolled && user.enrolled.length? user.enrolled.map(e=>`<div style="margin:6px 0">• ${escapeHtml(e)}</div>`).join(''): 'No enrollments yet.'}</div></div>`;
+  }else{
+    authBtn.textContent='Sign In'; authBtn.onclick=openAuth; dashboard.style.display='none';
+  }
+}
+
+// init
+updateUIForUser(JSON.parse(localStorage.getItem('tl_current')||'null'));
+
+// Enrollment demo
+function openEnroll(title){
+  const modal=document.getElementById('enrollModal'); modal.style.display='flex';
+  document.getElementById('enrollBody').innerHTML = `<p class='small'>You are applying to: <strong>${decodeURIComponent(title)}</strong></p><div style='margin-top:12px'><button class='btn' onclick="enrollCourse('${encodeURIComponent(title)}')">Confirm Enrollment</button> <button style='margin-left:8px' onclick='closeEnroll()' class='btn'>Cancel</button></div>`;
+}
+function closeEnroll(){document.getElementById('enrollModal').style.display='none'}
+
+function enrollCourse(titleEnc){
+  const user = JSON.parse(localStorage.getItem('tl_current')||'null');
+  if(!user){alert('Please sign in to enroll.'); openAuth(); return}
+  const title=decodeURIComponent(titleEnc);
+  user.enrolled = user.enrolled || [];
+  if(user.enrolled.includes(title)){alert('Already enrolled'); return}
+  user.enrolled.push(title);
+  // update users store
+  const users=getUsers(); const uidx = users.findIndex(u=>u.email===user.email); if(uidx>=0){users[uidx]=user; saveUsers(users)}
+  localStorage.setItem('tl_current',JSON.stringify(user)); updateUIForUser(user);
+  alert('Enrolled: '+title);
+  closeEnroll();
+}
+
+function showCourse(id){
+  const c = COURSES.find(x=>x.id===id); if(!c) return; alert(`${c.title}\n\nCategory: ${c.category}\nLevel: ${c.level}\n\n${c.desc}`);
+}
+
+// Partner form
+function openPartnerForm(){document.getElementById('partnerModal').style.display='flex'}
+function closePartnerForm(){document.getElementById('partnerModal').style.display='none'}
+function submitPartner(){const n=document.getElementById('orgName').value;const e=document.getElementById('orgEmail').value;const note=document.getElementById('orgNote').value;alert('Partnership request sent — we will contact '+n);closePartnerForm();}
+
+// Subscribe
+function subscribe(){const e=document.getElementById('subEmail').value;alert('Subscribed: '+e);document.getElementById('subEmail').value='';}
+
+// Simple helper when page loads from anchor to close mobile drawer
+if(window.location.hash) setTimeout(()=>{document.querySelector(window.location.hash)?.scrollIntoView({behavior:'smooth'})},300);
+
+// Accessibility: close modals on ESC
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ document.querySelectorAll('.modal-bg').forEach(m=>m.style.display='none'); closeMobile(); } });
+
 </script>
-
-<footer>
-  <p>&copy; 2025 TechLift Liberia — Empowering the Future of Technology Education</p>
-</footer>
-
 </body>
 </html>
-
