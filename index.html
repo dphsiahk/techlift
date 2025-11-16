@@ -235,16 +235,16 @@
     <p class="lead">Manage payments for course enrollment. Choose mobile money (Orange or Lonestar) or card payment.</p>
     <div class="grid" style="margin-top:12px">
       <div class="card">
-        <h3>Payment Demo</h3>
+        <h3>Payment</h3>
         <p class="small">This demo includes mock payment flows and hooks for real API integration.</p>
         <p class="small"><strong>Note:</strong> For production, implement server-side payment callbacks and secure transaction verification.</p>
         <div style="margin-top:12px">
-          <button class="btn" onclick="openBillingDemo()">Open Billing Demo</button>
+          <button class="btn" onclick="openBillingDemo()">Open Billing</button>
         </div>
       </div>
       <div class="card">
         <h3>Invoices</h3>
-        <p class="small">Download invoices for completed payments (demo only).</p>
+        <p class="small">Download invoices for completed payments.</p>
         <div id="invoiceList" class="small"></div>
       </div>
     </div>
@@ -362,7 +362,7 @@
 
     <div id="forgotBox" style="margin-top:16px;display:none">
       <h4>Reset Password (demo)</h4>
-      <p class="small">Enter your email — we will send a reset OTP (demo uses same flow).</p>
+      <p class="small">Enter your email — we will send a reset OTP.</p>
       <form onsubmit="event.preventDefault();startPasswordReset()">
         <input id="forgotEmail" type="email" placeholder="Email" required />
         <button class="btn" type="submit">Send Reset OTP</button>
@@ -417,9 +417,9 @@
    - In production, move email sending & payment verification to server
    - Demo data & localStorage used here
    ============================ */
-emailjs.init('YOUR_EMAILJS_USER_ID'); // <- replace with your EmailJS user id
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';       // replace
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';     // replace
+emailjs.init('professorhudsonsiahk@gmail.com'); // <- replace with your EmailJS user id
+const EMAILJS_SERVICE_ID = 'service_kpysyp8';       // replace
+const EMAILJS_TEMPLATE_ID = 'service_kpysyp8';     // replace
 
 /* ===========
   Demo Courses
