@@ -1,1 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechLift Africa — Accelerating Digital Transformation</title>
+  <meta name="description" content="TechLift Africa — Pan-African tech enablement: SaaS, training, GovTech, FinTech and local capacity building." />
+  <meta name="theme-color" content="#0f172a" />
 
+  <!-- Tailwind Play CDN for quick deployable Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind custom config
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5a4',
+            accent: '#f97316',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Simple page styles -->
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Decorative background starfield */
+    .starfield { background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06), transparent 1px), radial-gradient(circle at 70% 40%, rgba(255,255,255,0.04), transparent 1px); }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-800 bg-gradient-to-b from-slate-50 to-white starfield">
+
+  <!-- NAV -->
+  <header class="fixed w-full z-40 bg-white/70 backdrop-blur-md shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3" aria-label="TechLift Africa">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold shadow-lg">TL</div>
+        <div class="hidden md:block">
+          <h1 class="text-lg font-semibold">TechLift Africa</h1>
+          <p class="text-xs text-slate-600">Digital transformation across 52 African states</p>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#about" class="hover:text-primary">About</a>
+        <a href="#services" class="hover:text-primary">Services</a>
+        <a href="#countries" class="hover:text-primary">Country Hubs</a>
+        <a href="#training" class="hover:text-primary">Training</a>
+        <a href="#partners" class="hover:text-primary">Partners</a>
+        <a href="#contact" class="bg-primary text-white px-4 py-2 rounded-full hover:opacity-95">Get Started</a>
+      </nav>
+
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" aria-label="Open menu" class="p-2 rounded-md hover:bg-slate-100">
+          <svg id="menu-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menu-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t bg-white/90">
+      <div class="px-6 py-4 flex flex-col gap-3 text-sm">
+        <a href="#about" class="block">About</a>
+        <a href="#services" class="block">Services</a>
+        <a href="#countries" class="block">Country Hubs</a>
+        <a href="#training" class="block">Training</a>
+        <a href="#partners" class="block">Partners</a>
+        <a href="#contact" class="block font-semibold text-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="pt-28 pb-20">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <div class="space-y-6">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">TechLift Africa</h2>
+        <p class="text-lg text-slate-600 max-w-xl">Accelerating digital transformation across Africa — building localized SaaS products, training talent and partnering with governments, MNOs and NGOs to scale impact across 52 nations.</p>
+
+        <div class="flex gap-4 items-center">
+          <a href="#contact" class="inline-flex items-center rounded-full bg-primary text-white px-6 py-3 font-semibold shadow hover:opacity-95">Start a pilot</a>
+          <a href="#about" class="inline-flex items-center gap-2 text-sm text-slate-700 hover:text-primary">View profile
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
+          <div class="text-center">
+            <div class="text-2xl font-bold">52</div>
+            <div class="text-xs text-slate-500">African States</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold">200k+</div>
+            <div class="text-xs text-slate-500">Trained Learners (goal)</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold">5M+</div>
+            <div class="text-xs text-slate-500">Target Users</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold">MNOs</div>
+            <div class="text-xs text-slate-500">& Strategic Partners</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-2xl shadow-2xl overflow-hidden bg-gradient-to-br from-primary/30 to-accent/10 p-6">
+          <img src="https://images.unsplash.com/photo-1526378721935-4d6b2b2a3b83?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=8d3f2b3e8b8b0b9a" alt="African tech meeting" class="w-full h-72 object-cover rounded-lg shadow-lg" />
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div class="bg-white/90 p-4 rounded-lg">
+              <h4 class="text-sm font-semibold">EdTech</h4>
+              <p class="text-xs text-slate-600">Localized learning platforms & teacher training.</p>
+            </div>
+            <div class="bg-white/90 p-4 rounded-lg">
+              <h4 class="text-sm font-semibold">FinTech</h4>
+              <p class="text-xs text-slate-600">Mobile payments & merchant solutions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -right-8 -bottom-8 w-48 h-48 rounded-xl bg-white/60 blur-lg transform rotate-6"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-16 bg-gradient-to-b from-white to-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="lg:col-span-2 space-y-6">
+          <h3 class="text-3xl font-bold">About TechLift Africa</h3>
+          <p class="text-slate-600">TechLift Africa is a pan-African technology enablement platform focused on building mobile-first SaaS, delivering vocational & developer training, and partnering with governments and MNOs to launch scalable digital services. We structure pilots to measure social impact while building product-market fit for each local context.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div class="p-4 bg-white rounded-lg shadow">
+              <h4 class="text-sm font-semibold">Mission</h4>
+              <p class="text-xs text-slate-500">Accelerate inclusive digital transformation across Africa.</p>
+            </div>
+            <div class="p-4 bg-white rounded-lg shadow">
+              <h4 class="text-sm font-semibold">Vision</h4>
+              <p class="text-xs text-slate-500">A digitally empowered Africa where technology lifts livelihoods.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="bg-white rounded-lg shadow p-6">
+          <h4 class="text-sm font-semibold text-slate-700">Quick Facts</h4>
+          <ul class="mt-4 space-y-3 text-slate-600 text-sm">
+            <li><strong>HQ:</strong> Accra / Nairobi (recommended)</li>
+            <li><strong>Focus:</strong> EdTech, FinTech, GovTech, HealthTech</li>
+            <li><strong>Model:</strong> SaaS + Training + Implementation</li>
+            <li><strong>Target:</strong> 52 countries, local offices</li>
+          </ul>
+          <a href="#contact" class="mt-4 inline-block text-sm text-primary">Contact for partnership →</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-2xl font-bold mb-6">Services & Products</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h4 class="text-lg font-semibold">SaaS Platforms</h4>
+          <p class="text-slate-600 text-sm mt-2">Mobile-first LMS, merchant payments, telemedicine triage and citizen services portals — built for low-bandwidth & offline use.</p>
+          <ul class="mt-4 text-sm text-slate-500 space-y-2">
+            <li>Teacher & student portals</li>
+            <li>Merchant wallets & POS SDK</li>
+            <li>Basic EMR for clinics</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <h4 class="text-lg font-semibold">Training & Bootcamps</h4>
+          <p class="text-slate-600 text-sm mt-2">Blended learning for developers, entrepreneurs and public-sector staff — accredited pathways and train-the-trainer programs.</p>
+          <ul class="mt-4 text-sm text-slate-500 space-y-2">
+            <li>Full-stack & mobile bootcamps</li>
+            <li>SME digitalization workshops</li>
+            <li>Certification & placement support</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <h4 class="text-lg font-semibold">Advisory & Implementation</h4>
+          <p class="text-slate-600 text-sm mt-2">Digital strategy, system integration and M&E for donors and governments.</p>
+          <ul class="mt-4 text-sm text-slate-500 space-y-2">
+            <li>Procurement-ready implementation</li>
+            <li>Local partner mobilization</li>
+            <li>Monitoring & impact evaluation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES / HUBS -->
+  <section id="countries" class="py-16 bg-gradient-to-b from-slate-50 to-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-2xl font-bold">Country Hubs & Local Playbooks</h3>
+        <a href="#contact" class="text-sm text-primary">Request a country playbook</a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Example country cards: repeatable pattern for 52 countries (compact view) -->
+        <div class="bg-white rounded-lg shadow p-5">
+          <h4 class="font-semibold">Ghana — Accra</h4>
+          <p class="text-xs text-slate-500 mt-1">Priority: FinTech, EdTech, SME digitalization</p>
+          <div class="mt-3 text-sm text-slate-600">Local HQ recommendation — training hub & fintech pilots.</div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-5">
+          <h4 class="font-semibold">Kenya — Nairobi</h4>
+          <p class="text-xs text-slate-500 mt-1">Priority: FinTech wallets, AgriTech</p>
+          <div class="mt-3 text-sm text-slate-600">Leverage M-Pesa partnerships and local hubs.</div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-5">
+          <h4 class="font-semibold">Nigeria — Lagos</h4>
+          <p class="text-xs text-slate-500 mt-1">Priority: MSME payments, EdTech</p>
+          <div class="mt-3 text-sm text-slate-600">Large market — fintech and merchant onboarding focus.</div>
+        </div>
+
+        <!-- compact grid: the rest of the 52 countries can be placed here the same way. For brevity we show a sample set. -->
+      </div>
+
+      <div class="mt-8 text-sm text-slate-500">
+        <em>Note:</em> Full standardized country playbooks (52) are available and can be exported per-country as PDFs or slide decks on request.
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training" class="py-16">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-2xl font-bold">Training & Capacity Building</h3>
+        <p class="text-slate-600 mt-3">TechLift Africa delivers blended programs — practical bootcamps, accredited micro-credentials, enterprise upskilling and trainer certification. We match graduates to local employers and contractors through our marketplace.</p>
+
+        <ul class="mt-4 space-y-3 text-sm text-slate-500">
+          <li><strong>Bootcamp:</strong> 12-week full-stack + placement support</li>
+          <li><strong>Short courses:</strong> Product management, M&E, FinTech integration</li>
+          <li><strong>Train-the-trainer:</strong> Scaleable instructor model for national rollout</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=12b9b6d0f9f0f8a" alt="training" class="w-full h-44 object-cover rounded-md" />
+        <div class="mt-4">
+          <h4 class="font-semibold">Corporate & University Partnerships</h4>
+          <p class="text-sm text-slate-600 mt-2">We run co-branded cohorts and employer-driven curriculum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="py-16 bg-gradient-to-b from-white to-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-2xl font-bold mb-6">Strategic Partners</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+        <div class="p-6 bg-white rounded-lg shadow text-center">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=bd5c7a4a3c8e" alt="partner" class="w-28 h-12 object-contain mx-auto"/>
+          <div class="text-xs text-slate-500 mt-3">Mobile Network Operators</div>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow text-center">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2fb7b8b1f6a9" alt="partner" class="w-28 h-12 object-contain mx-auto"/>
+          <div class="text-xs text-slate-500 mt-3">Banks & Fintechs</div>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow text-center">
+          <img src="https://images.unsplash.com/photo-1520975911744-6f0b6148f0b7?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b8b3c7a2f1c" alt="partner" class="w-28 h-12 object-contain mx-auto"/>
+          <div class="text-xs text-slate-500 mt-3">Universities & Hubs</div>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow text-center">
+          <img src="https://images.unsplash.com/photo-1532619685608-36f1e39b7e3d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a2b6c7d8e9f" alt="partner" class="w-28 h-12 object-contain mx-auto"/>
+          <div class="text-xs text-slate-500 mt-3">Donors & NGOs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="py-16">
+    <div class="max-w-3xl mx-auto px-6 text-center bg-gradient-to-br from-primary/10 to-accent/5 rounded-2xl p-8 shadow">
+      <h3 class="text-2xl font-bold">Start a pilot with TechLift Africa</h3>
+      <p class="text-slate-600 mt-3">Tell us which country and which service you want to pilot. We’ll deliver a tailored playbook, budget and timeline.</p>
+
+      <form class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" action="mailto:hello@techlift.africa" method="post" enctype="text/plain">
+        <input name="name" type="text" placeholder="Full name" required class="p-3 rounded-lg border" />
+        <input name="email" type="email" placeholder="Email" required class="p-3 rounded-lg border" />
+        <input name="country" type="text" placeholder="Country of interest" class="p-3 rounded-lg border md:col-span-2" />
+        <textarea name="message" placeholder="Brief message / pilot idea" class="p-3 rounded-lg border md:col-span-2"></textarea>
+        <button type="submit" class="md:col-span-2 bg-primary text-white px-6 py-3 rounded-full font-semibold">Request playbook</button>
+      </form>
+
+      <p class="text-xs text-slate-500 mt-3">Or email us directly at <a href="mailto:hello@techlift.africa" class="text-primary">hello@techlift.africa</a></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-white border-t">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-slate-600">© <span id="year"></span> TechLift Africa — All rights reserved.</div>
+      <div class="flex gap-4 items-center">
+        <a href="#" class="text-sm text-slate-600 hover:text-primary">Privacy</a>
+        <a href="#" class="text-sm text-slate-600 hover:text-primary">Terms</a>
+        <div class="text-sm text-slate-500">Built with care • Deploy-ready</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open');
+    const closeIcon = document.getElementById('menu-close');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple intersection reveal for sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('opacity-100', 'translate-y-0');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('section').forEach(s => {
+      s.classList.add('opacity-0', 'translate-y-6', 'transition', 'duration-700');
+      observer.observe(s);
+    });
+  </script>
+</body>
+</html>
