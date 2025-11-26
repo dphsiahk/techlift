@@ -297,13 +297,16 @@
       <h3 class="text-2xl font-bold">Start a pilot with TechLift Africa</h3>
       <p class="text-slate-600 mt-3">Tell us which country and which service you want to pilot. We’ll deliver a tailored playbook, budget and timeline.</p>
 
-      <form class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" action="mailto:hello@techlift.africa" method="post" enctype="text/plain">
-        <input name="name" type="text" placeholder="Full name" required class="p-3 rounded-lg border" />
-        <input name="email" type="email" placeholder="Email" required class="p-3 rounded-lg border" />
-        <input name="country" type="text" placeholder="Country of interest" class="p-3 rounded-lg border md:col-span-2" />
-        <textarea name="message" placeholder="Brief message / pilot idea" class="p-3 rounded-lg border md:col-span-2"></textarea>
-        <button type="submit" class="md:col-span-2 bg-primary text-white px-6 py-3 rounded-full font-semibold">Request playbook</button>
-      </form>
+      <form class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" onsubmit="sendEmail(event)">
+  <input name="name" type="text" placeholder="Full name" required class="p-3 rounded-lg border" />
+  <input name="email" type="email" placeholder="Email" required class="p-3 rounded-lg border" />
+  <input name="country" type="text" placeholder="Country of interest" class="p-3 rounded-lg border md:col-span-2" />
+  <textarea name="message" placeholder="Brief message / pilot idea" class="p-3 rounded-lg border md:col-span-2"></textarea>
+  <button type="submit" class="md:col-span-2 bg-primary text-white px-6 py-3 rounded-full font-semibold">
+    Request playbook
+  </button>
+</form>
+
 
       <p class="text-xs text-slate-500 mt-3">Or email us directly at <a href="mailto:hello@techlift.africa" class="text-primary">hello@techlift.africa</a></p>
     </div>
@@ -349,5 +352,29 @@
       observer.observe(s);
     });
   </script>
+
+  <!-- Email JS Script -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+      emailjs.init("h4XL2I1RfuVQnA0Zq"); // ← Replace with your EmailJS Public Key
+  })();
+
+  function sendEmail(event) {
+      event.preventDefault(); // Prevent page reload
+
+      const form = event.target;
+
+      emailjs.sendForm("service_kpysyp8", "template_5b3i0p9", form)
+        .then(() => {
+            alert("Message sent successfully! We'll reach out shortly.");
+            form.reset();
+        }, (error) => {
+            alert("Sending failed, please try again.");
+            console.log("EmailJS Error:", error);
+        });
+  }
+</script>
+
 </body>
 </html>
